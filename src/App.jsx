@@ -1,38 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-function Card({ className = "", children }) {
-  return <div className={className}>{children}</div>;
-}
-
-function CardContent({ className = "", children }) {
-  return <div className={className}>{children}</div>;
-}
-
-function Button({ className = "", variant = "default", size = "default", children, ...props }) {
-  const base =
-    "inline-flex items-center justify-center border font-medium transition disabled:opacity-50";
-  const style =
-    variant === "outline"
-      ? "bg-white text-slate-900 border-slate-300 hover:bg-slate-50"
-      : variant === "ghost"
-      ? "bg-transparent border-transparent text-slate-700 hover:bg-slate-100"
-      : "bg-slate-950 text-white border-slate-950 hover:bg-slate-800";
-
-  return (
-    <button className={`${base} ${style} ${className}`} {...props}>
-      {children}
-    </button>
-  );
-}
-
-function Input({ className = "", ...props }) {
-  return (
-    <input
-      className={`border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300 ${className}`}
-      {...props}
-    />
-  );
-}
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const queues = [
   { key: "O", label: "HALL O", subtitle: "Oxygaz" },
@@ -129,31 +99,31 @@ function JobCard({ job, onStatusToggle, onMove, onPriorityToggle, onEdit }) {
                 </div>
               ) : null}
 
-              <div className="grid grid-cols-4 gap-1.5 mt-3">
+              <div className="grid grid-cols-2 gap-2 mt-3">
                 <Button
                   variant={startActive ? "default" : "outline"}
-                  className="rounded-xl text-xs px-2 h-8"
+                  className="rounded-xl text-sm px-4 h-10 w-full font-semibold"
                   onClick={() => onStatusToggle(job.id, "In progress")}
                 >
                   START
                 </Button>
                 <Button
                   variant={doneActive ? "default" : "outline"}
-                  className="rounded-xl text-xs px-2 h-8"
+                  className="rounded-xl text-sm px-4 h-10 w-full font-semibold"
                   onClick={() => onStatusToggle(job.id, "Done")}
                 >
                   DONE
                 </Button>
                 <Button
                   variant={problemActive ? "default" : "outline"}
-                  className="rounded-xl text-xs px-2 h-8"
+                  className="rounded-xl text-sm px-4 h-10 w-full font-semibold"
                   onClick={() => onStatusToggle(job.id, "Problem")}
                 >
                   PROBLEM
                 </Button>
                 <Button
                   variant={job.priorityOne ? "default" : "outline"}
-                  className="rounded-xl text-xs px-2 h-8"
+                  className="rounded-xl text-sm px-4 h-10 w-full font-semibold"
                   onClick={() => onPriorityToggle(job.id)}
                 >
                   P1
@@ -489,11 +459,11 @@ export default function SvodkyAppPrototype() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2">
-            <Button variant="outline" className="rounded-2xl h-10" onClick={exportVisibleQueueToCsv}>
+            <Button variant="outline" className="rounded-2xl h-11 min-w-[180px] px-5 text-sm font-semibold" onClick={exportVisibleQueueToCsv}>
               Export queue to Excel
             </Button>
             <Button
-              className="rounded-2xl h-10"
+              className="rounded-2xl h-11 min-w-[180px] px-5 text-sm font-semibold"
               onClick={() => document.getElementById("manual-form")?.scrollIntoView({ behavior: "smooth" })}
             >
               + Add job manually
@@ -541,10 +511,10 @@ export default function SvodkyAppPrototype() {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button variant={showMode === "open" ? "default" : "outline"} className="rounded-xl h-9" onClick={() => setShowMode("open")}>
+                  <Button variant={showMode === "open" ? "default" : "outline"} className="rounded-2xl h-11 min-w-[120px] px-5 text-sm font-semibold" onClick={() => setShowMode("open")}>
                     Open
                   </Button>
-                  <Button variant={showMode === "all" ? "default" : "outline"} className="rounded-xl h-9" onClick={() => setShowMode("all")}>
+                  <Button variant={showMode === "all" ? "default" : "outline"} className="rounded-2xl h-11 min-w-[120px] px-5 text-sm font-semibold" onClick={() => setShowMode("all")}>
                     All
                   </Button>
                 </div>
